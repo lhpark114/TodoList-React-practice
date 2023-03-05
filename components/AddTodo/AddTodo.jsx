@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {v4 as uuid4} from 'uuid';
 
 export default function AddTodo( { onAdd } ) {
     const [text, setText] = useState('');
@@ -8,7 +9,7 @@ export default function AddTodo( { onAdd } ) {
         if(text.trim.length === 0) {
             return;
         }
-        onAdd({id: 'uniquekey', text, status: 'active'});
+        onAdd({id: uuid4(), text, status: 'active'});
         setText('');
     };
     return (
