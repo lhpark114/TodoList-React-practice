@@ -1,69 +1,42 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+import AddTodo from "./AddTodo/AddTodo";
+import Todo from "./Todo/Todo";
 
 export default function TodoList() {
-    const [todos, setTodos] = useState([{
-        id: '123',
-        text: 'Grocery',
-        satus: 'active'
+  const [todos, setTodos] = useState([
+    {
+      id: "123",
+      text: "Grocery",
+      satus: "active",
     },
     {
-        id: '124',
-        text: 'Study',
-        satus: 'active'
+      id: "124",
+      text: "Study",
+      satus: "active",
     },
-]);
+  ]);
 
-    const handleAdd = (todo) => setTodos([...todos, todo])
-        // Should update 'new to to' to todos
-    return (
+  const handleAdd = (todo) => 
+    setTodos([...todos, todo]);
+  const handleUpdate = (updated) => 
+    setTodos(todos.map((t) => (t.id === updated.id ? updated : t)));
+  const handleDelete = (deleted) => 
+    setTodos(todos.filter((t) => (t.id !== deleted.id)));
+
+  return (
     <Section>
-        <ul>
-            {
-                todos.map((item) => <li key={item.id}>{item.text}</li>)
-            }
-        </ul>
-        <AddTodo onAdd={handleAdd} />
-    </Section>
-    );   
-}
-
-
-
-
-export default function Checked() {
-    const [checked, setChecked] = useState(false);
-    const handleChange = () => setChecked(prev = !prev);
-    return(
-        <div className="itemlist">
-            <input id="checkbox" type="checkbox" value={checked} onChange={handleChange}/>
-        </div>
-    );
-}
-
-export default function Item() {
-    const [item, setItem] = useState('');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
-    const buttonClick = (e) => {
-        
-    }
-    return (
-        
-        <form onSubmit={handleSubmit}>
-            <input
-                type='text'
-                id='item'
-                name='item'
-                value={item}
-                onChange={(e) => {
-                    setItem(e.target.value);
-                }}
+      <ul>
+        <Checkbox onChange={onChange}/>
+        {todos.map((item) => (
+          <Todo 
+            key={item.id} 
+            todo={item} 
+            onUpdate={handleUpdate} 
+            onDelete={handleDelete}
             />
-            <button onClick={buttonClick} className="addButton">Add</button>
-            <ul>list.map((item) => (<li>{item}</li>))</ul>
-        </form>
-        
-    )
+        ))}
+      </ul>
+      <AddTodo onAdd={handleAdd} />
+    </Section>
+  );
 }

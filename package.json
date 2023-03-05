@@ -2,6 +2,8 @@
   "name": "TodoList React",
   "packageManager": "yarn@3.3.0",
   "dependencies": {
+    "react-icons": "^4.8.0",
+    "react-scripts": "^5.0.1",
     "uuid": "^9.0.0"
   }
 }
