@@ -26,9 +26,8 @@ export default function TodoList({ filter }) {
   const filtered = getFilteredItems(todos, filter);
 
   return (
-    <Section className={styles.container}>
+    <section>
       <ul className={styles.list}>
-        <Checkbox onChange={onChange} />
         {filtered.map((item) => (
           <Todo
             key={item.id}
@@ -39,7 +38,7 @@ export default function TodoList({ filter }) {
         ))}
       </ul>
       <AddTodo onAdd={handleAdd} />
-    </Section>
+    </section>
   );
 }
 
